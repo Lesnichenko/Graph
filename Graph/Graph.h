@@ -1,7 +1,11 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
-#include <string> // библеотека для использования строк
+#include <string>	// библеотека для использования строк
+#include <vector>   // Вектор - массив, который может изменять свой размер
+#include <set>      // Множество - набор элементов одного типа
+#include <map>      // Отображение - набор элементов "ключ-значение"
+#include <tuple>    // Кортеж - N элементов, рассматриваемых как единое целое
 
 using namespace std;
 
@@ -9,7 +13,6 @@ class Graph {
 public:
 	// Конструктор и Деструктор класса
 	Graph();
-	~Graph();
 
 	// Считывает граф из файла fileName
 	void readGraph(string fileName);
@@ -35,10 +38,15 @@ public:
 	// Возвращает флаг взвешенности графа
 	bool is_weighted();
 private:
+	void printGraph();// Выводит граф на печать
 	char type;      // Тип текущего представления
 	int N;          // Количество вершин
 	int M;          // Количество ребер
 	bool weighted;  // В случае true, если граф взвешенный, иначе false
 	bool oriented;  // В случае true, если граф ориентированный, иначе false
+
+	vector< vector< int > > adjMatrix;            // Матрица смежности
+	map< int, set< pair< int, int > > > adjList;  // Список смежности
+	set< tuple< int, int, int > > edgList;        // Список ребер
 };
 #endif
